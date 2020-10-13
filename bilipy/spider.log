@@ -1,0 +1,51 @@
+2020-10-13 15:25:23 [scrapy.core.downloader.handlers.http11] WARNING: Got data loss in https://www.bilibili.com/ranking/origin/0/0/3?rt=V%2FymTlOu4ow%2Fy4xxNWPUZ%2FgyysuplfLt1nSFWW3JDFI%3D. If you want to process broken responses set the setting DOWNLOAD_FAIL_ON_DATALOSS = False -- This message won't be shown in further requests
+2020-10-13 15:25:23 [scrapy.core.downloader.handlers.http11] WARNING: Got data loss in https://www.bilibili.com/ranking/all/0/0/3?rt=V%2FymTlOu4ow%2Fy4xxNWPUZ%2FgyysuplfLtc7T5%2FyJ7SDo%3D. If you want to process broken responses set the setting DOWNLOAD_FAIL_ON_DATALOSS = False -- This message won't be shown in further requests
+2020-10-13 17:35:44 [scrapy.core.engine] ERROR: Error while obtaining start requests
+Traceback (most recent call last):
+  File "E:\Users\xcl\anaconda3\lib\site-packages\scrapy\core\engine.py", line 129, in _next_request
+    request = next(slot.start_requests)
+  File "E:\PyDev\bilipy\bilipy\spiders\bilibili.py", line 22, in start_requests
+    os.remove('txts\\*.txt')
+OSError: [WinError 123] 文件名、目录名或卷标语法不正确。: 'txts\\*.txt'
+2020-10-13 17:36:29 [scrapy.core.engine] ERROR: Error while obtaining start requests
+Traceback (most recent call last):
+  File "E:\Users\xcl\anaconda3\lib\site-packages\scrapy\core\engine.py", line 129, in _next_request
+    request = next(slot.start_requests)
+  File "E:\PyDev\bilipy\bilipy\spiders\bilibili.py", line 22, in start_requests
+    os.remove('txts\\*.txt')
+OSError: [WinError 123] 文件名、目录名或卷标语法不正确。: 'txts\\*.txt'
+2020-10-13 17:37:37 [scrapy.core.engine] ERROR: Error while obtaining start requests
+Traceback (most recent call last):
+  File "E:\Users\xcl\anaconda3\lib\site-packages\scrapy\core\engine.py", line 129, in _next_request
+    request = next(slot.start_requests)
+  File "E:\PyDev\bilipy\bilipy\spiders\bilibili.py", line 22, in start_requests
+    os.remove('E:\PyDev\\bilipy\\bilipy\\txts\\*.txt')
+OSError: [WinError 123] 文件名、目录名或卷标语法不正确。: 'E:\\PyDev\\bilipy\\bilipy\\txts\\*.txt'
+2020-10-13 17:39:42 [scrapy.core.engine] ERROR: Error while obtaining start requests
+Traceback (most recent call last):
+  File "E:\Users\xcl\anaconda3\lib\site-packages\scrapy\core\engine.py", line 129, in _next_request
+    request = next(slot.start_requests)
+  File "E:\PyDev\bilipy\bilipy\spiders\bilibili.py", line 22, in start_requests
+    os.remove('E:/PyDev/bilipy/bilipy/txts/*.txt')
+OSError: [WinError 123] 文件名、目录名或卷标语法不正确。: 'E:/PyDev/bilipy/bilipy/txts/*.txt'
+2020-10-13 17:40:28 [scrapy.core.engine] ERROR: Error while obtaining start requests
+Traceback (most recent call last):
+  File "E:\Users\xcl\anaconda3\lib\site-packages\scrapy\core\engine.py", line 129, in _next_request
+    request = next(slot.start_requests)
+  File "E:\PyDev\bilipy\bilipy\spiders\bilibili.py", line 22, in start_requests
+    os.unlink('E:/PyDev/bilipy/bilipy/txts/*.txt')
+OSError: [WinError 123] 文件名、目录名或卷标语法不正确。: 'E:/PyDev/bilipy/bilipy/txts/*.txt'
+2020-10-13 17:43:34 [scrapy.core.engine] ERROR: Error while obtaining start requests
+Traceback (most recent call last):
+  File "E:\Users\xcl\anaconda3\lib\site-packages\scrapy\core\engine.py", line 129, in _next_request
+    request = next(slot.start_requests)
+  File "E:\PyDev\bilipy\bilipy\spiders\bilibili.py", line 22, in start_requests
+    os.unlink('E:/PyDev/bilipy/bilipy/txts/*.txt'.strip('\u202a'))
+OSError: [WinError 123] 文件名、目录名或卷标语法不正确。: 'E:/PyDev/bilipy/bilipy/txts/*.txt'
+2020-10-13 17:43:58 [scrapy.core.engine] ERROR: Error while obtaining start requests
+Traceback (most recent call last):
+  File "E:\Users\xcl\anaconda3\lib\site-packages\scrapy\core\engine.py", line 129, in _next_request
+    request = next(slot.start_requests)
+  File "E:\PyDev\bilipy\bilipy\spiders\bilibili.py", line 22, in start_requests
+    os.unlink('E:/PyDev/bilipy/bilipy/txts/*.txt'.strip())
+OSError: [WinError 123] 文件名、目录名或卷标语法不正确。: 'E:/PyDev/bilipy/bilipy/txts/*.txt'

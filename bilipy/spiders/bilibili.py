@@ -1,7 +1,13 @@
 # -*- coding: utf-8 -*-
 import scrapy
-
+import io
+import os
+import time
 from bilipy.items import BilipyItem
+from bilibili_api import video
+import bilibili_api
+SESSDATA = '810758c5%2C1606366695%2C35df9*51'
+CSRD = 'ab39f9fb709768893fc3767c80869736'
 class BilibiliSpider(scrapy.Spider):
     name = 'bilibili'
     allowed_domains = ['www.bilibili.com']
@@ -10,17 +16,23 @@ class BilibiliSpider(scrapy.Spider):
     rank_type = {
         'all': ['all/0/0/3', '全站榜'],
         'origin': ['origin/0/0/3', '原创榜'],
-        'bangumi': ['bangumi/13/0/3', '新番榜'],
-        'cinema': ['cinema/177/0/3', '影视榜'],
         'rookie': ['rookie/0/0/3', '新人榜']
     }
 
     # 爬虫开始的函数，向调度器发送url并指定回调函数
     def start_requests(self):
+        for root, dirs, files in os.walk('txts/'):
+            for i in files:
+                os.remove(root + i)
         # 调用类中的变量要加self
         for value in self.rank_type.values():
             url = self.base_url + value[0]
             yield scrapy.Request(url, callback=self.parse)
+
+    def openfile(self, path, content):
+        with io.open(path, 'a+', newline='', encoding='gb18030') as f:
+            f.write(content + '\n')
+            f.close()
 
     def parse(self, response):
         item = BilipyItem()
@@ -28,10 +40,27 @@ class BilibiliSpider(scrapy.Spider):
         url = response.url
         item['set_name'] = url.split('/')[4]
         item['rank_type'] = self.rank_type[item['set_name']][1]
+
         # 直接对response进行xpath解析，得到选择器对象的列表
         info_list = response.xpath("//div[@class='rank-list-wrap']/ul/li")
         # 遍历每一个li元素
         for info in info_list:
+            urls = info.xpath(".//div[@class='info']/a/@href")[0].extract()
+            if 'bangumi' in urls:
+                pass
+            else:
+                bvid = urls.split('/')[4]
+                danmu = video.get_danmaku(bvid=bvid)
+                for i in danmu:
+                    self.openfile('txts\\'+ item['rank_type'] + 'Content.txt', i.text)
+                titleTxt = info.xpath(".//div[@class='info']/a/text()")[0].extract()
+                self.openfile('txts\\' + item['rank_type']+'Titles.txt', titleTxt)
+            time.sleep(0.5)
+
+
+
+
+
             item['rank_no'] = info.xpath("./div[@class='num']/text()")[0].extract()
             item['title'] = info.xpath(".//div[@class='info']/a/text()")[0].extract()
             # 这里是一个li元素里面，所以xpath解析出来只有3个元素,索引取值即可
