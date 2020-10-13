@@ -55,7 +55,7 @@ class BilibiliSpider(scrapy.Spider):
                     self.openfile('txts\\'+ item['rank_type'] + 'Content.txt', i.text)
                 titleTxt = info.xpath(".//div[@class='info']/a/text()")[0].extract()
                 self.openfile('txts\\' + item['rank_type']+'Titles.txt', titleTxt)
-            time.sleep(0.5)
+            # time.sleep(0.5)
 
 
 
