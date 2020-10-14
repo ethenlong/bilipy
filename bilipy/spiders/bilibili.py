@@ -14,9 +14,9 @@ class BilibiliSpider(scrapy.Spider):
     # start_urls = ['http://www.bilibili.com/']
     base_url = 'https://www.bilibili.com/ranking/'
     rank_type = {
-        'all': ['all/0/0/3', '全站榜'],
-        'origin': ['origin/0/0/3', '原创榜'],
-        'rookie': ['rookie/0/0/3', '新人榜']
+        'all': ['all', '全站榜'],
+        'origin': ['origin', '原创榜'],
+        'rookie': ['rookie', '新人榜']
     }
 
     # 爬虫开始的函数，向调度器发送url并指定回调函数
@@ -27,22 +27,25 @@ class BilibiliSpider(scrapy.Spider):
         # 调用类中的变量要加self
         for value in self.rank_type.values():
             url = self.base_url + value[0]
+            print(url)
             yield scrapy.Request(url, callback=self.parse)
 
     def openfile(self, path, content):
         with io.open(path, 'a+', newline='', encoding='gb18030') as f:
-            f.write(content + '\n')
+            f.write(content + " ")
             f.close()
 
     def parse(self, response):
         item = BilipyItem()
         # 获得请求的url地址
         url = response.url
-        item['set_name'] = url.split('/')[4]
+        item['set_name'] = url.split('/')[4].split('?')[0]
+        print(item['set_name'])
         item['rank_type'] = self.rank_type[item['set_name']][1]
-
-        # 直接对response进行xpath解析，得到选择器对象的列表
+        print(response.text)
+        # 直接对response进行xpath解析，得到选择器对象的列表 //*[@id="app"]/div[2]/div[2]
         info_list = response.xpath("//div[@class='rank-list-wrap']/ul/li")
+        print(info_list)
         # 遍历每一个li元素
         for info in info_list:
             urls = info.xpath(".//div[@class='info']/a/@href")[0].extract()

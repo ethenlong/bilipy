@@ -10,10 +10,10 @@ import numpy as np
 from PIL import Image
 import random
 import io
-
+import re
 
 def readfile(path):
-    with io.open(path, 'r') as f:
+    with io.open(path, 'rb') as f:
         data = f.read()
         f.close()
         return data
@@ -36,7 +36,33 @@ wc = WordCloud(
     random_state=50,
 )
 
-data = readfile('../txts/全站榜Titles.txt')
-tags = analyse.textrank(data, topK=30, withWeight=True)
-for i in tags:
-    print(i)
+with open('stop_words.txt', 'rb') as f:
+    stopWords = [line.strip() for line in f.readlines()]
+print(stopWords)
+
+data = readfile('../txts/全站榜Content.txt')
+data = data.strip()
+data = data.replace("\n", "")
+wordList = jieba.cut(data)
+
+wordList =  [w for w in wordList if len(w)>1
+ and not re.match('^[a-z|A-Z|0-9|.]*$', w) ]
+
+for w in wordList:
+    print(w)
+    if w in stopWords:
+        print(w)
+
+wordList = [w for w in wordList if w not in stopWords]
+print(wordList)
+# print(wordList)
+wordStr = " ".join(wordList)
+# print(wordStr)
+word_cloud = wc.generate(wordStr)
+word_cloud.to_file('ss.jpg')
+plt.imshow(word_cloud)
+plt.axis('off')
+plt.show()
+# tags = analyse.textrank(data, topK=30, withWeight=True)
+# for i in tags:
+#     print(i)
