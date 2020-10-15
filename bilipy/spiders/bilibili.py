@@ -35,6 +35,7 @@ class BilibiliSpider(scrapy.Spider):
             f.write(content + " ")
             f.close()
 
+
     def parse(self, response):
         item = BilipyItem()
         # 获得请求的url地址
