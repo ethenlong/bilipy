@@ -41,20 +41,20 @@ with open('stop_words.txt', 'rb') as f:
 print(stopWords)
 
 data = readfile('../txts/全站榜Content.txt')
-data = data.strip()
-data = data.replace("\n", "")
 wordList = jieba.cut(data)
 
 wordList =  [w for w in wordList if len(w)>1
  and not re.match('^[a-z|A-Z|0-9|.]*$', w) ]
 
+print(stopWords)
+print(wordList)
 for w in wordList:
-    print(w)
+    # print(w)
     if w in stopWords:
         print(w)
 
 wordList = [w for w in wordList if w not in stopWords]
-print(wordList)
+# print(wordList)
 # print(wordList)
 wordStr = " ".join(wordList)
 # print(wordStr)

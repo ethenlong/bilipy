@@ -12,7 +12,7 @@ class BilibiliSpider(scrapy.Spider):
     name = 'bilibili'
     allowed_domains = ['www.bilibili.com']
     # start_urls = ['http://www.bilibili.com/']
-    base_url = 'https://www.bilibili.com/ranking/'
+    base_url = 'https://www.bilibili.com/v/popular/rank/'
     rank_type = {
         'all': ['all', '全站榜'],
         'origin': ['origin', '原创榜'],
@@ -21,7 +21,7 @@ class BilibiliSpider(scrapy.Spider):
 
     # 爬虫开始的函数，向调度器发送url并指定回调函数
     def start_requests(self):
-        for root, dirs, files in os.walk('txts/'):
+        for root, dirs, files in os.walk('../txts/'):
             for i in files:
                 os.remove(root + i)
         # 调用类中的变量要加self
@@ -39,10 +39,10 @@ class BilibiliSpider(scrapy.Spider):
         item = BilipyItem()
         # 获得请求的url地址
         url = response.url
-        item['set_name'] = url.split('/')[4].split('?')[0]
-        print(item['set_name'])
+        item['set_name'] = url.split('/')[6].split('?')[0]
+        # print(item['set_name'])
         item['rank_type'] = self.rank_type[item['set_name']][1]
-        print(response.text)
+        # print(response.text)
         # 直接对response进行xpath解析，得到选择器对象的列表 //*[@id="app"]/div[2]/div[2]
         info_list = response.xpath("//div[@class='rank-list-wrap']/ul/li")
         print(info_list)
