@@ -25,7 +25,7 @@ def readfile(path):
 def random_color_func(word=None, font_size=None, position=None, orientation=None, font_path=None, random_state=None):
     h, s, l = random.choice([(188, 72, 53), (253, 63, 56), (12, 78, 69)])
     return "hsl({}, {}%, {}%)".format(h, s, l)
-background_Image = np.array(Image.open('1.jpg'))
+background_Image = np.array(Image.open('1.png'))
 
 wc = WordCloud(
     background_color='white',
@@ -37,21 +37,13 @@ wc = WordCloud(
 )
 
 with open('stop_words.txt', 'rb') as f:
-    stopWords = [line.strip() for line in f.readlines()]
-print(stopWords)
+    stopWords = [line.decode('utf-8').replace('\r\n', '') for line in f.readlines()]
 
 data = readfile('../txts/全站榜Content.txt')
 wordList = jieba.cut(data)
 
 wordList =  [w for w in wordList if len(w)>1
  and not re.match('^[a-z|A-Z|0-9|.]*$', w) ]
-
-print(stopWords)
-print(wordList)
-for w in wordList:
-    # print(w)
-    if w in stopWords:
-        print(w)
 
 wordList = [w for w in wordList if w not in stopWords]
 # print(wordList)
