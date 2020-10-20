@@ -92,5 +92,5 @@ ITEM_PIPELINES = {
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 # 设置日志级别和日志文件
-# LOG_LEVEL = 'WARNING'
-# LOG_FILE = 'spider.log'
+LOG_LEVEL = 'WARNING'
+LOG_FILE = 'spider.log'

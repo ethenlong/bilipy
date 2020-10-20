@@ -16,7 +16,10 @@ class BilibiliSpider(scrapy.Spider):
     rank_type = {
         'all': ['all', '全站榜'],
         'origin': ['origin', '原创榜'],
-        'rookie': ['rookie', '新人榜']
+        'rookie': ['rookie', '新人榜'],
+        'life': ['life', '生活榜'],
+        'digital': ['digital', '数码榜'],
+        'food': ['food', '美食榜']
     }
 
     # 爬虫开始的函数，向调度器发送url并指定回调函数
@@ -58,7 +61,7 @@ class BilibiliSpider(scrapy.Spider):
                     self.openfile('txts\\'+ item['rank_type'] + 'Content.txt', i.text)
                 titleTxt = info.xpath(".//div[@class='info']/a/text()")[0].extract()
                 self.openfile('txts\\' + item['rank_type']+'Titles.txt', titleTxt)
-            # time.sleep(0.5)
+            time.sleep(0.1)
 
 
 
