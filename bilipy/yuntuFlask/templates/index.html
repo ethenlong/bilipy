@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>B站热词图鉴</title>
+    <style type="text/css">
+
+        /*标题样式*/
+        p{
+            text-align: center;
+            font-size: 25px;
+            color: cadetblue;
+            font-family: fantasy;
+
+        }
+
+        .imgBox{
+            border-top: 2px solid cadetblue;
+            width: 70%;
+            height: 800px;
+            margin: 0 auto;
+
+        }
+
+        .imgBox img{
+            width: 90%;
+            height: 700px;
+            margin: 0 auto;
+            padding-top: 30px;
+
+        }
+
+        .img1{
+            display: block;
+        }
+        .img2{
+            display: none;
+        }
+        .img3{
+            display: none;
+        }
+        .img4{
+            display: none;
+        }
+        .img5{
+            display: none;
+        }
+        .img6{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<p>图片轮播</p>
+<div class="imgBox">
+    <img class="img-slide img1" src="{{ url_for('static', filename='全站榜Content.jpg')}}" alt="1" onclick="ChangeImg()">
+    <img class="img-slide img2" src="{{ url_for('static', filename='全站榜Titles.jpg')}}" alt="2" onclick="ChangeImg()">
+    <img class="img-slide img3" src="{{ url_for('static', filename='新人榜Content.jpg')}}" alt="3" onclick="ChangeImg()">
+    <img class="img-slide img4" src="{{ url_for('static', filename='新人榜Titles.jpg')}}" alt="4" onclick="ChangeImg()">
+    <img class="img-slide img5" src="{{ url_for('static', filename='原创榜Content.jpg')}}" alt="5" onclick="ChangeImg()">
+    <img class="img-slide img6" src="{{ url_for('static', filename='原创榜Titles.jpg')}}" alt="6" onclick="ChangeImg()">
+</div>
+</body>
+<script type="text/javascript">
+    var index=0;
+    //改变图片
+    function ChangeImg() {
+        index++;
+        var a=document.getElementsByClassName("img-slide");
+        if(index>=a.length) index=0;
+        for(var i=0;i<a.length;i++){
+            a[i].style.display='none';
+        }
+        a[index].style.display='block';
+    }
+    //设置定时器，每隔两秒切换一张图片
+    // setInterval(ChangeImg,2000);
+</script>
+</html>

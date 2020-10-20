@@ -7,10 +7,10 @@ import jieba
 from jieba import analyse
 import matplotlib.pyplot as plt
 import numpy as np
-from PIL import Image
+from PIL import Image, ImageDraw, ImageFont
 import random
 import io
-import re
+import os
 
 def readfile(path):
     with io.open(path, 'rb') as f:
@@ -36,25 +36,50 @@ wc = WordCloud(
     random_state=50,
 )
 
-with open('stop_words.txt', 'rb') as f:
-    stopWords = [line.decode('utf-8').replace('\r\n', '') for line in f.readlines()]
 
-data = readfile('../txts/全站榜Content.txt')
-wordList = jieba.cut(data)
+def addTitle(filepath, text, filename):
+    setFont = ImageFont.truetype('./SourceHanSerifCN-Medium.otf', 40)
+    fillColor = "#0000ff"
+    size = (40, 40)
+    image = Image.open(filepath)
+    draw = ImageDraw.Draw(image)
+    draw.text((40, 40), text, font=setFont, fill=fillColor, direction=None)
+    image.save(filename)
+    # pic_text(filepath, size, text, setFont, fillColor, filename, direction=None)
+
+def getDirs(path):
+    for root, dirs, files in os.walk(path):
+        return root, files
+
+def generatePics():
+    with open('stop_words.txt', 'rb') as f:
+        stopWords = [line.decode('utf-8').replace('\r\n', '') for line in f.readlines()]
+
+    root, files = getDirs('../txts/')
+    for file in files:
+        data = readfile(root+file)
+        word_ist = jieba.cut(data)
+        word_ist = [w for w in word_ist if w not in stopWords]
+        word_str = " ".join(word_ist)
+        word_cloud = wc.generate(word_str)
+        word_cloud.to_file('static/'+file[0:-4]+'.jpg')
+        addTitle('static/'+file[0:-4]+'.jpg', file[0:-4], 'static/'+file[0:-4]+'.jpg')
+        # plt.imshow(word_cloud)
+        # plt.axis('off')
+        # plt.show()
+
+generatePics()
+
 
 # wordList =  [w for w in wordList if len(w)>1
 #  and not re.match('^[a-z|A-Z|0-9|.]*$', w) ]
 
-wordList = [w for w in wordList if w not in stopWords]
+
 # print(wordList)
 # print(wordList)
-wordStr = " ".join(wordList)
+
 # print(wordStr)
-word_cloud = wc.generate(wordStr)
-word_cloud.to_file('ss.jpg')
-plt.imshow(word_cloud)
-plt.axis('off')
-plt.show()
+
 # tags = analyse.textrank(data, topK=30, withWeight=True)
 # for i in tags:
 #     print(i)
