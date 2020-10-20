@@ -48,7 +48,7 @@ class BilibiliSpider(scrapy.Spider):
         # print(response.text)
         # 直接对response进行xpath解析，得到选择器对象的列表 //*[@id="app"]/div[2]/div[2]
         info_list = response.xpath("//div[@class='rank-list-wrap']/ul/li")
-        print(info_list)
+        # print(info_list)
         # 遍历每一个li元素
         for info in info_list:
             urls = info.xpath(".//div[@class='info']/a/@href")[0].extract()
@@ -58,10 +58,10 @@ class BilibiliSpider(scrapy.Spider):
                 bvid = urls.split('/')[4]
                 danmu = video.get_danmaku(bvid=bvid)
                 for i in danmu:
-                    self.openfile('txts\\'+ item['rank_type'] + 'Content.txt', i.text)
+                    self.openfile('txts/'+ item['rank_type'] + 'Content.txt', i.text)
                 titleTxt = info.xpath(".//div[@class='info']/a/text()")[0].extract()
-                self.openfile('txts\\' + item['rank_type']+'Titles.txt', titleTxt)
-            time.sleep(0.1)
+                self.openfile('txts/' + item['rank_type']+'Titles.txt', titleTxt)
+            # time.sleep(0.1)
 
 
 
