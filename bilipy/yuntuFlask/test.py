@@ -16,7 +16,7 @@ from tornado.httpserver import HTTPServer
 from tornado.ioloop import IOLoop
 from tornado.options import define, options
 
-define('port', type=int, default=8111)
+define('port', type=int, default=80)
 # deploy or debug
 define('mode', default='debug')
 
