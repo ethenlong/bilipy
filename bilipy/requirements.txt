@@ -1,0 +1,8 @@
+pip3 install scrapy
+pip3 install bilibili_api
+pip3 install WordCloud
+pip3 install jieba
+pip3 install numpy
+pip3 install pillow
+pip3 install flask
+pip3 install tornado
