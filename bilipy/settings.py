@@ -67,9 +67,9 @@ DEFAULT_REQUEST_HEADERS = {
 
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-ITEM_PIPELINES = {
-   'bilipy.pipelines.BilipyPipeline': 300,
-}
+# ITEM_PIPELINES = {
+#    'bilipy.pipelines.BilipyPipeline': 300,
+# }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html
@@ -92,5 +92,5 @@ ITEM_PIPELINES = {
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 # 设置日志级别和日志文件
-LOG_LEVEL = 'WARNING'
-LOG_FILE = 'spider.log'
+# LOG_LEVEL = 'WARNING'
+# LOG_FILE = 'spider.log'
