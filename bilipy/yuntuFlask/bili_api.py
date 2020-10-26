@@ -45,6 +45,7 @@ def addTitle(filepath, text, filename):
     draw = ImageDraw.Draw(image)
     draw.text((40, 40), text, font=setFont, fill=fillColor, direction=None)
     image.save(filename)
+    print('add title')
     # pic_text(filepath, size, text, setFont, fillColor, filename, direction=None)
 
 def getDirs(path):
@@ -62,6 +63,7 @@ def generatePics():
         word_ist = [w for w in word_ist if w not in stopWords]
         word_str = " ".join(word_ist)
         word_cloud = wc.generate(word_str)
+        print('generateWord')
         word_cloud.to_file('static/'+file[0:-4]+'.jpg')
         addTitle('static/'+file[0:-4]+'.jpg', file[0:-4], 'static/'+file[0:-4]+'.jpg')
         # plt.imshow(word_cloud)
