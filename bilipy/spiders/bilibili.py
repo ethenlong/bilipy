@@ -55,10 +55,10 @@ class BilibiliSpider(scrapy.Spider):
             if 'bangumi' in urls:
                 pass
             else:
-                bvid = urls.split('/')[4]
-                danmu = video.get_danmaku(bvid=bvid)
-                for i in danmu:
-                    self.openfile('txts/'+ item['rank_type'] + 'Content.txt', i.text)
+                # bvid = urls.split('/')[4]
+                # danmu = video.get_danmaku(bvid=bvid)
+                # for i in danmu:
+                #     self.openfile('txts/'+ item['rank_type'] + 'Content.txt', i.text)
                 titleTxt = info.xpath(".//div[@class='info']/a/text()")[0].extract()
                 self.openfile('txts/' + item['rank_type']+'Titles.txt', titleTxt)
             time.sleep(0.1)
