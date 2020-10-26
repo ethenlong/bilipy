@@ -32,8 +32,10 @@ def index():
     img_urls = []
     for file in files:
         img_urls.append(root+file)
-        print(files)
-    return render_template('index.html', img_urls=img_urls)
+        # print(files)
+    with open('updateTime.txt') as f:
+        time = f.readline()
+    return render_template('index.html', img_urls=img_urls, time=time)
 
 def main():
     options.parse_command_line()

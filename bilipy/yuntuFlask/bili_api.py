@@ -11,6 +11,7 @@ from PIL import Image, ImageDraw, ImageFont
 import random
 import io
 import os
+import time
 
 def readfile(path):
     with io.open(path, 'rb') as f:
@@ -66,6 +67,9 @@ def generatePics():
 
         word_cloud.to_file('static/'+file[0:-4]+'.jpg')
         addTitle('static/'+file[0:-4]+'.jpg', file[0:-4], 'static/'+file[0:-4]+'.jpg')
+    with open('updateTime.txt', 'w') as tf:
+        tf.write(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
+        tf.close()
         # plt.imshow(word_cloud)
         # plt.axis('off')
         # plt.show()
