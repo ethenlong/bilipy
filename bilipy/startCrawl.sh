@@ -2,6 +2,9 @@
 
 export PATH=$PATH:/usr/bin
 
+cd ~/bilipy/bilipy/txts/
+rm -rf *.txt
+
 cd ~/bilipy/bilipy/
 python3 -m scrapy crawl bilibili >> ~/bilipy/crawl.log 2>&1
 cd ~/bilipy/bilipy/yuntuFlask/

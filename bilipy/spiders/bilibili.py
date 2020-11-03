@@ -22,15 +22,15 @@ class BilibiliSpider(scrapy.Spider):
         'food': ['food', '美食榜']
     }
 
+
+
     # 爬虫开始的函数，向调度器发送url并指定回调函数
     def start_requests(self):
-        for root, dirs, files in os.walk('../txts/'):
-            for i in files:
-                os.remove(root + i)
+
         # 调用类中的变量要加self
         for value in self.rank_type.values():
             url = self.base_url + value[0]
-            print(url)
+            # print(url)
             yield scrapy.Request(url, callback=self.parse)
 
     def openfile(self, path, content):
