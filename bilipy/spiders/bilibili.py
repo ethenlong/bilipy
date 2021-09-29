@@ -62,8 +62,9 @@ class BilibiliSpider(scrapy.Spider):
                 titleTxt = info.xpath(".//div[@class='info']/a/text()")[0].extract()
                 self.openfile('txts/' + item['rank_type']+'Titles.txt', titleTxt)
                 tags = video.get_tags(bvid=bvid)
+                # print(tags)
                 for tag in tags:
-                    self.openfile('txts/'+ item['rank_type'] + 'Tags.txt', tag.text)
+                    self.openfile('txts/'+ item['rank_type'] + 'Tags.txt', tag['tag_name'])
             time.sleep(0.1)
 
 
